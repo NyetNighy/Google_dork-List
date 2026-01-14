@@ -1,0 +1,162 @@
+1. Finding Exposed Documents & Files:
+
+filetype:pdf site:target.com "confidential" | "internal use only" | "not for distribution"
+filetype:xlsx | filetype:xls | filetype:csv "password" | "credentials" | "api key"
+filetype:docx | filetype:doc intext:"password list" | "employee list"
+filetype:pdf site:target.com "budget" | "financial report" | "invoice"
+filetype:log inurl:"error" | "access" site:target.com
+intitle:"index of" "parent directory" (backup | .git | .env | config)
+filetype:sql "MySQL dump" "password" OR "CREATE TABLE" site:target.com
+filetype:bak | filetype:old | filetype:save | filetype:~ intext:"backup" site:target.com
+filetype:txt intext:"ssh private key" OR "BEGIN RSA PRIVATE KEY"
+filetype:json intext:"private_key" OR "client_secret" OR "bearer token"
+filetype:pdf site:target.com "password reset" | "temporary password" | "one-time password"
+filetype:xls | filetype:xlsx intext:"username" "password" -template -sample
+filetype:doc | filetype:docx intitle:"meeting notes" | "action items" "confidential"
+filetype:csv site:target.com "email" "phone" "address" "employee"
+filetype:log "error" "failed login" | "authentication failure" site:target.com
+filetype:txt | filetype:log intext:"DB_PASSWORD" OR "DATABASE_URL"
+
+2. Exposed Directories & Sensitive Folders:
+
+intitle:"index of" "DCIM" | ".git" | "backup" | "logs" | "admin" | "private"
+intitle:"index.of" intext:"Apache" "Server at" -inurl:github
+inurl:".env" intitle:"index of"
+inurl:"/backup/" intitle:"index of"
+intitle:"index of" "/uploads/" | "/files/" | "/downloads/" | "/media/"
+intitle:"index of" ".bak" | ".old" | ".sql" | ".zip" | ".tar.gz"
+intitle:"index of" "/wp-content/uploads/" -inurl:wordpress.org
+intitle:"index of /" ".ssh" | "id_rsa" | "authorized_keys"
+intitle:"index of" "/config/" | "/settings/" | "/private/"
+intitle:"index of" intext:"Last modified" "parent directory" "mongodb" | "mysql"
+intitle:"index of" "/backup/" | "/backups/" | "/db_backup/"
+intitle:"index of" "/log/" | "/logs/" | "/error_log"
+intitle:"index of" ".git" "HEAD" OR "config"
+intitle:"index of" "/.aws/" | "/.azure/" | "/.gcp/"
+
+3. Login Pages, Admin Panels & Dashboards:
+
+inurl:admin | inurl:login | inurl:signin | inurl:portal site:target.com
+intitle:"login" "powered by" (wordpress | joomla | drupal | magento)
+inurl:(wp-login.php | administrator | admin.php | login.aspx)
+intitle:"remote management" intext:"please enter password"
+inurl:(dashboard | controlpanel | cp | panel | manage) intitle:"login"
+inurl:phpmyadmin | inurl:adminer | inurl:pma intitle:"phpMyAdmin"
+inurl:(webmail | roundcube | squirrelmail | horde) site:target.com
+inurl:/admin/console | inurl:/admin/login | inurl:/administrator
+intitle:"admin login" "powered by" (drupal | joomla | vbulletin | xenforo)
+inurl:".php" intitle:"login" intext:"forgot password" | "remember me"
+inurl:/login/index | inurl:/signin | inurl:/auth/login
+intitle:"Cpanel" | intitle:"WHM" | intitle:"Plesk" intext:"login"
+inurl:prometheus | inurl:grafana intitle:"login" | "sign in"
+inurl:/adminer.php | inurl:/dbadmin | inurl:/mysqladmin
+
+4. Configuration Files & Secrets:
+
+ext:env | ext:yaml | ext:yml "DB_PASSWORD" | "API_KEY" | "SECRET_KEY"
+inurl:config filetype:xml | filetype:conf | filetype:ini
+intext:"aws_access_key_id" filetype:txt | filetype:log
+intext:"api_key" | "secret" | "token" ext:txt | ext:json -github
+ext:sql | ext:dmp | ext:dump intext:"password" | "pwd" | "pass"
+inurl:".git/config" intitle:"index of"
+inurl:".DS_Store" intitle:"index of"
+inurl:config/database.yml | inurl:config/app.php intext:"password"
+ext:properties | ext:props intext:"jdbc.password" | "db.password"
+inurl:".bak" ext:env | ext:ini | ext:conf "DB_USER" OR "API_SECRET"
+intext:"-----BEGIN PRIVATE KEY-----" filetype:txt | filetype:pem
+intext:"sk_live_" | "pk_live_" OR "sk_test_" filetype:txt site:target.com
+inurl:firebase.json | inurl:".firebaserc" intext:"apiKey"
+intext:"MONGO_URI" | "MONGODB_URI" OR "MONGOLAB_URI" ext:env | ext:yaml
+
+5. Emails, Usernames & Contacts:
+
+site:target.com "@target.com" -inurl:(signup | login | career)
+"email" OR "@target.com" filetype:xls | filetype:csv | filetype:txt
+site:target.com intext:"@gmail.com" "@yahoo.com" intext:"contact"
+intext:"@target.com" intitle:"staff" | "directory" | "team"
+site:target.com intext:"@target.com" filetype:xlsx | filetype:csv | filetype:vcf
+"@target.com" intitle:"email list" | "contact list" | "distribution list"
+site:target.com intext:"@target.com" intext:"tel:" | "phone:" | "mobile:"
+intext:"@target.com" filetype:pdf intitle:"directory" | "staff directory"
+site:target.com "@" -inurl:(login | signup | career | jobs)
+intext:"username" "@target.com" filetype:txt | filetype:log
+site:target.com intext:"e-mail" | "email address" "contact us"
+"@target.com" intitle:"resume" | "cv" | "curriculum vitae"
+intext:"@target.com" inurl:(about | team | staff | employees)
+site:target.com filetype:vcard | filetype:vcf "@target.com"
+
+6. Finding Subdomains & Related Assets:
+
+site:*.target.com -www -dev -staging -test -beta
+site:target.com -inurl:www
+site:target.com inurl:(dev | staging | test | uat | qa | beta)
+site:*.target.com -www -inurl:(blog | forum | shop | store)
+site:target-*.* | site:*.target-*
+site:target.com inurl:(api | api/v1 | api/v2 | graphql | rest)
+site:*.target.com inurl:(jenkins | sonar | nexus | artifactory)
+site:dev.target.com | site:staging.target.com | site:test.target.com
+site:target.com inurl:(kibana | elasticsearch | logstash)
+site:*.target.com intitle:"default web page" | "under construction"
+site:target.com -inurl:www intext:"server" "hostname"
+site:internal.target.com | site:intranet.target.com
+site:*.target.com filetype:php intitle:"phpinfo"
+
+7. Vulnerable / Misconfigured Tech Signatures:
+
+intext:"powered by" (phpmyadmin | roundcube | webmail)
+intitle:"welcome to" "nginx" OR "apache" "server at"
+inurl:(phpinfo.php | test.php | info.php)
+intext:"MySQL dump" (pass | password | pwd) filetype:sql
+intitle:"phpinfo" "PHP Version" inurl:phpinfo.php
+intext:"MySQL said: Documentation" | "Error establishing a database connection"
+inurl:server-status intitle:"Apache Status"
+intext:"X-Powered-By: PHP" intitle:"403" | "404" "forbidden"
+intext:"Django" "Debug = True" | "ALLOWED_HOSTS"
+intitle:"Jenkins" "login" intext:"Dashboard"
+intext:"Elasticsearch" "You Know, for Search"
+inurl:/server-status apache intitle:"apache status"
+intext:"phpMyAdmin" "running on" "MySQL"
+intitle:"phpMyAdmin" "Welcome to phpMyAdmin" -intitle:"login"
+
+8. Camera / IoT / Printers / Devices (exposed panels):
+
+inurl:(viewerframe?mode=motion | view/index.shtml | axis-cgi/mjpg)
+intitle:"Live View / — AXIS" | "webcamXP" | "D-Link Internet Camera"
+inurl:"top.htm" intitle:"BlueNet Video Server"
+intitle:"printer status" intext:"HP LaserJet"
+intitle:"Web Viewer" intext:"ID" "Password" (axis | sony | panasonic)
+inurl:"view/viewer_index.shtml" intext:"Live Video"
+intitle:"DVR Login" | intitle:"NVR Login" intext:"Username" "Password"
+inurl:"/cgi-bin/guestimage.html" | inurl:"/cgi-bin/viewer/video.jpg"
+intitle:"GoAhead WebServer" intext:"Login" "Camera"
+inurl:"onvif/device_service" | inurl:"onvif/snapshot"
+intitle:"Ricoh" "Printer" intext:"Web Image Monitor"
+inurl:"port_37777" | inurl:"port_554" intitle:"RTSP" "stream"
+intitle:"Brother" "Web Based Management" intext:"password"
+inurl:"/webcam/" | inurl:"/mjpg/video.mjpg" | inurl:"/video.cgi"
+
+9. Bug Bounty / Program Discovery:
+
+inurl:(bug bounty | security | vulnerability | responsible disclosure) site:target.com
+intext:"we welcome responsible disclosure" site:*.target.*
+"bugcrowd" | "hackerone" | "yeswehack" "target.com"
+
+10. Quick Recon Combo Examples (replace target.com):
+
+site:target.com (ext:xml | ext:conf | ext:cnf | ext:reg | ext:inf | ext:rdp | ext:cfg | ext:txt | ext:ora | ext:inc)
+site:target.com (inurl:admin | inurl:login | intitle:admin)
+intitle:"index of" site:target.com (backup | .git | .svn | .env | logs)
+site:target.com (filetype:sql | filetype:bak | filetype:old | filetype:~) ("password" OR "credential" OR "key")
+site:target.com intitle:"index of" ("/admin/" | "/config/" | "/uploads/" | "/private/" | "/secure/")
+site:target.com (inurl:login | inurl:admin | inurl:dashboard) (intitle:login | intitle:admin | intitle:dashboard)
+site:target.com (ext:env | ext:yml | ext:yaml | ext:json) ("secret" OR "key" OR "token" OR "password")
+site:target.com (inurl:wp-admin | inurl:wp-login | inurl:xmlrpc.php) -inurl:wordpress.com
+site:target.com (filetype:pdf | filetype:docx | filetype:xlsx) ("confidential" OR "internal" OR "proprietary")
+site:target.com (inurl:api | inurl:graphql | inurl:rest | inurl:v1 | inurl:v2) (intitle:"api" OR intext:"swagger")
+site:target.com (intitle:"phpinfo" OR inurl:phpinfo.php OR inurl:test.php OR inurl:info.php)
+site:target.com (inurl:jenkins | inurl:sonarqube | inurl:nexus | inurl:artifactory | inurl:gitlab)
+site:target.com (filetype:txt | filetype:log | filetype:csv) ("email" OR "@target.com" OR "username" OR "password")
+
+
+Add -github -gitlab -pastebin when hunting secrets
+Chain with site:*.target.com for broader coverage
