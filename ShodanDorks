@@ -20,6 +20,11 @@ vuln:CVE-2021-44228              # Log4Shell
 vuln:CVE-2019-19781              # Citrix ADC/Gateway RCE
 vuln:CVE-2025-*                  # Replace with recent CVEs (Shodan tracks many)
 "MongoDB Server Information" port:27017 -authentication  # Open/unauthenticated MongoDB
+vuln:CVE-2025-64446                  # Example: Recent FortiWeb path traversal/auth bypass (check Shodan for exact CVE support)
+vuln:CVE-2021-44228 OR vuln:Log4Shell  # Still lingering in legacy Java apps
+vuln:CVE-2014-0160                   # Heartbleed (surprisingly persistent)
+"OpenSSL/1.0.1" port:443             # Heartbleed-prone old OpenSSL versions
+"Apache/2.4." vuln:CVE-*             # Apache with recent vulns (combine with specific CVE if known)
 
 4. IoT & Device-Specific
 port:554 has_screenshot:true     # RTSP cameras / webcams
@@ -28,23 +33,49 @@ port:554 has_screenshot:true     # RTSP cameras / webcams
 "Intel(R) Active Management Technology"  # Intel AMT (often vuln if exposed)
 tag:ics                          # Industrial Control Systems (SCADA/PLC)
 "screenshot.label:ics"           # ML-tagged ICS screenshots
+port:554 has_screenshot:true                             # RTSP video streams (cameras)
+"Server: yawcam" OR "webcamXP" OR "webcam 7"             # Software webcams
+"Server: IP Webcam Server" "200 OK"                      # Android IP Webcam app
+html:"DVR_H264 ActiveX"                                  # Chinese DVRs with ActiveX (vuln-prone)
+intitle:"Live View" OR "Network Camera" port:80,81,8080  # Generic cams
+"Chromecast:" port:8008                                  # Google Chromecast control
+"Server: HP HTTP" "Serial Number:"                       # HP printers/copiers
+"Server: EPSON-HTTP" OR "EPSON_Linux UPnP"               # Epson printers
+"Server: CANON HTTP Server"                              # Canon devices
+"Server: KS_HTTP"                                        # Kyocera printers
 
 4. SSH / Remote Access
 ssh port:22                      # Standard SSH
 ssh -port:22                     # SSH on non-standard ports (stealthy)
 "SSH-2.0-OpenSSH" "root"         # Potential root-allowed SSH (dangerous)
+"authentication disabled" "RFB 003.008"                  # VNC unauthenticated
+port:23 "root@" -login -password                         # Telnet with root prompt
+"Intel(R) Active Management Technology" port:16992,16993 # Intel AMT (remote management, often vuln)
+"HP-ILO" OR "iLO" port:443                               # HP iLO management
+"Android Debug Bridge" port:5555                         # ADB exposed (Android root bridge)
 
 5. Database & Sensitive Exposures
 "MongoDB" "authentication disabled" port:27017  # Fully open Mongo
 "redis" port:6379                # Exposed Redis (often unauth)
 "Memcached" port:11211           # Open Memcached (DDoS amplification risk)
 "elastic" port:9200              # Exposed Elasticsearch (data leaks)
+"MongoDB Server Information" port:27017 -authentication  # Fully open MongoDB
+"Set-Cookie: mongo-express=" "200 OK" port:27017        # Mongo-Express admin exposed
+"redis" port:6379 "Authentication required" -password   # Redis auth disabled or weak
+"Memcached" port:11211                                   # Open Memcached (DDoS amp risk)
+"elastic" OR "Elasticsearch" port:9200 "_cat/indices"    # Exposed ES clusters (data theft)
+"phpMyAdmin" OR "MySQL" "phpMyAdmin" port:80,443         # Exposed phpMyAdmin panels
 
 6. Cloud & API Leaks
 "Amazon AWS" port:9200           # Exposed ES on AWS
 "Docker" port:2375               # Unprotected Docker API
 "Kubernetes" port:6443           # Exposed K8s API server
 "kube" "apiserver"               # Kubernetes exposures
+"Docker" port:2375 "Docker Remote API"                   # Unauth Docker daemon
+"Kubernetes" port:6443 "kube-apiserver"                  # Exposed K8s API
+"Weave Scope" http.favicon.hash:567176827                # Weave Scope dashboard (often unauth)
+"Jenkins" "X-Jenkins" http.title:"Dashboard"             # Exposed Jenkins (script console risk)
+"X-Plex-Protocol" port:32400                             # Plex media servers (potential leaks)
 
 7. Ransomware / Malware Indicators
 "encrypted attention" has_screenshot:true  # Ransomware lock screens via OCR
@@ -55,8 +86,34 @@ port:17                          # Quote of the Day (ancient RFC 865 service)
 "telnet" "login:"                # Open Telnet (plaintext creds)
 "HP-UX" OR "Windows 2000"        # Very old OS still online
 "printer" "ready"                # Exposed printers (print fun messages?)
+port:17                                                  # Quote of the Day (ancient)
+"telnet" "login:"                                        # Open Telnet banners
+"Windows 2000" OR "Windows NT 4.0"                       # Prehistoric OS still online
+"printer" "ready" "Model"                                # Exposed printers saying hello
+"your files are encrypted" has_screenshot:true           # Ransomware lock screens (via OCR)
 
 9. Advanced Combinations
 country:GB port:80,443 vuln:CVE-*  # UK web servers with recent vulns
 has_screenshot:true "default password" OR "admin:admin"  # Devices with default creds visible
 org:"your-company" -port:443     # Your org's non-HTTPS exposures (quick audit)
+country:GB city:"Southend-on-Sea" port:80,443 has_screenshot:true  # Local to your area (Southend-on-Sea exposures)
+org:"your-company-name" vuln:*                           # Your org's vulns (replace name)
+port:80,443,8080,8443 "default password" OR "admin:admin"  # Defaults visible in banners/screenshots
+has_screenshot:true tag:iot "password"                   # IoT with screenshot + password hints
+
+
+10. ICS/SCADA & Industrial (critical infrastructure)
+tag:ics OR tag:scada                                     # ML-tagged industrial systems
+"Siemens, SIMATIC" port:161                              # Siemens PLCs via SNMP
+"Server: CarelDataServer" "200 Document follows"         # Carel refrigeration controllers
+"HID VertX" port:4070                                    # Access control panels
+"Server: EIG Embedded Web Server"                        # Energy metering devices
+"Server: Prismview Player"                               # Digital signage / ICS displays
+"voter system serial" country:US                         # Voting machine exposures (depressing)
+"smart install client active"                            # Cisco Smart Install (RCE risk)
+
+11. NAS & Storage Leaks
+"Authentication: disabled" port:445                      # SMB shares open/no auth
+"220" "230 Login successful." port:21                    # Anonymous FTP
+"X-Plex-Protocol" "200 OK" port:32400                    # Plex NAS/media
+"Set-Cookie: iomega="                                    # Iomega/LenovoEMC NAS
