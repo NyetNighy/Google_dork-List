@@ -157,6 +157,43 @@ site:target.com (intitle:"phpinfo" OR inurl:phpinfo.php OR inurl:test.php OR inu
 site:target.com (inurl:jenkins | inurl:sonarqube | inurl:nexus | inurl:artifactory | inurl:gitlab)
 site:target.com (filetype:txt | filetype:log | filetype:csv) ("email" OR "@target.com" OR "username" OR "password")
 
+11. Cloud & API credential leaks (very common in 2025+ misconfigs)
+filetype:env "AWS_ACCESS_KEY_ID" OR "AWS_SECRET_ACCESS_KEY"
+filetype:env "AZURE_CLIENT_SECRET" OR "azure_client_id"
+filetype:env "GOOGLE_APPLICATION_CREDENTIALS" OR "private_key"
+intext:"api_key" OR "apikey" OR "apiSecret" OR "access_token" filetype:env OR filetype:json OR filetype:yml OR filetype:yaml
+intext:"sk_live_" OR "pk_live_" OR "sk_test_" filetype:txt OR filetype:js  # Stripe keys
+
+12. Private keys, certificates & crypto wallets
+intext:"-----BEGIN PRIVATE KEY-----" OR "-----BEGIN RSA PRIVATE KEY-----" filetype:txt OR filetype:pem OR filetype:key
+intitle:"index of" "id_rsa" OR "id_ed25519" OR ".pem" -html
+intitle:"index of" "wallet.dat" OR "keystore.jks" OR "keystore.bks"
+
+13. Exposed .git and dev backups
+inurl:/.git/config OR inurl:/.git/HEAD intitle:"index of"
+inurl:/backup OR inurl:/.backup intitle:"index of" "parent directory"
+filetype:sql OR filetype:dump OR filetype:bak intext:"-- MySQL dump" OR "-- Dumping database structure"
+
+14. Sensitive config & credential files (modern & classic)
+intitle:"index of" "sitemanager.xml" OR "FileZilla.xml" OR "recentservers.xml"
+intitle:"index of" ".htpasswd" OR ".htaccess" OR "web.config"
+filetype:ovpn OR filetype:conf intext:"auth-user-pass" OR "http-proxy"
+filetype:rdp intext:"full address" OR "username" OR "password 51:b"
+
+15. Logs, tokens & dumps with specific patterns
+intext:"Bearer " OR "Authorization: Bearer" filetype:log OR filetype:txt OR filetype:json
+intext:"password" OR "passwd" OR "pwd" filetype:log OR filetype:txt OR filetype:sql -intext:"example" -intext:"sample"
+intext:"INSERT INTO users" OR "INSERT INTO `users`" filetype:sql
+
+16. IoT / Camera / Device exposures (still appear despite age)
+intitle:"Live View / - AXIS" OR inurl:view/index.shtml
+inurl:"CgiStart?page=" OR inurl:"/viewer/live/en/live.html"
+inurl:/mjpg/1 OR intitle:"webcam" "live image"
+
+17. GitHub / raw file leaks (high-value for bug bounty)
+site:raw.githubusercontent.com intext:"password" OR intext:"api_key" OR intext:"secret" (filetype:env OR filetype:json OR filetype:yml OR filetype:js)
+site:pastebin.com intext:"AWS_SECRET" OR "private_key" OR "password" after:2025-01-01
+
 
 Add -github -gitlab -pastebin when hunting secrets
 Chain with site:*.target.com for broader coverage
