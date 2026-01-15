@@ -1,0 +1,62 @@
+1. Basic / Common Filters
+port:80,443,8080                 # Common web ports (HTTP/HTTPS)
+product:Apache                   # Apache web servers
+http.title:"Index of /"          # Open directory listings
+has_screenshot:true              # Devices with a screenshot captured (great for visual recon)
+org:"Amazon.com"                 # Devices in a specific organization (e.g., AWS-hosted)
+country:GB                       # Devices in the UK (use 2-letter ISO codes)
+city:"Southend-on-Sea"           # Very local — useful for regional checks
+
+2. Web / HTTP Exposures
+http.component:"wordpress"       # Sites using WordPress
+http.html:"wp-config.php"        # Potential exposed WP config files
+"http.title:\"phpMyAdmin\""      # Exposed phpMyAdmin panels
+http.favicon.hash:81586312       # Common default favicon hashes (e.g., for specific CMS)
+x-powered-by:"PHP/5"             # Old/outdated PHP versions (vuln-prone)
+
+3. Vulnerable Services & CVEs
+vuln:CVE-2014-0160               # Heartbleed (still shows up occasionally)
+vuln:CVE-2021-44228              # Log4Shell
+vuln:CVE-2019-19781              # Citrix ADC/Gateway RCE
+vuln:CVE-2025-*                  # Replace with recent CVEs (Shodan tracks many)
+"MongoDB Server Information" port:27017 -authentication  # Open/unauthenticated MongoDB
+
+4. IoT & Device-Specific
+port:554 has_screenshot:true     # RTSP cameras / webcams
+"webcam" OR "DVR" OR "camera" port:80,81,8080  # Generic exposed cameras
+"NETGEAR" OR "Linksys" "admin"   # Default router panels
+"Intel(R) Active Management Technology"  # Intel AMT (often vuln if exposed)
+tag:ics                          # Industrial Control Systems (SCADA/PLC)
+"screenshot.label:ics"           # ML-tagged ICS screenshots
+
+4. SSH / Remote Access
+ssh port:22                      # Standard SSH
+ssh -port:22                     # SSH on non-standard ports (stealthy)
+"SSH-2.0-OpenSSH" "root"         # Potential root-allowed SSH (dangerous)
+
+5. Database & Sensitive Exposures
+"MongoDB" "authentication disabled" port:27017  # Fully open Mongo
+"redis" port:6379                # Exposed Redis (often unauth)
+"Memcached" port:11211           # Open Memcached (DDoS amplification risk)
+"elastic" port:9200              # Exposed Elasticsearch (data leaks)
+
+6. Cloud & API Leaks
+"Amazon AWS" port:9200           # Exposed ES on AWS
+"Docker" port:2375               # Unprotected Docker API
+"Kubernetes" port:6443           # Exposed K8s API server
+"kube" "apiserver"               # Kubernetes exposures
+
+7. Ransomware / Malware Indicators
+"encrypted attention" has_screenshot:true  # Ransomware lock screens via OCR
+"your files are encrypted"       # Common ransom notes in HTTP/screenshots
+
+8. Funny / Depressing / Legacy
+port:17                          # Quote of the Day (ancient RFC 865 service)
+"telnet" "login:"                # Open Telnet (plaintext creds)
+"HP-UX" OR "Windows 2000"        # Very old OS still online
+"printer" "ready"                # Exposed printers (print fun messages?)
+
+9. Advanced Combinations
+country:GB port:80,443 vuln:CVE-*  # UK web servers with recent vulns
+has_screenshot:true "default password" OR "admin:admin"  # Devices with default creds visible
+org:"your-company" -port:443     # Your org's non-HTTPS exposures (quick audit)
