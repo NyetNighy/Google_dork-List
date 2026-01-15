@@ -117,3 +117,6 @@ tag:ics OR tag:scada                                     # ML-tagged industrial 
 "220" "230 Login successful." port:21                    # Anonymous FTP
 "X-Plex-Protocol" "200 OK" port:32400                    # Plex NAS/media
 "Set-Cookie: iomega="                                    # Iomega/LenovoEMC NAS
+
+Vuln: and tag: queries are locked behind payments. vuln: only available on the small buisness plan and up.
+Same goes with the pages. With teh free search you can only go to page 2 and no further.
