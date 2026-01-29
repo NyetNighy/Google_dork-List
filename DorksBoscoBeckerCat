@@ -1,0 +1,412 @@
+File and Directory Listings
+These dorks target exposed directory indexes, backups, and sensitive files like history logs or configuration backups.
+
+intitle:index.of .bash_history
+intitle:index.of .sh_history
+intitle:"Index of" index.html.bak
+intitle:"Index of" index.php.bak
+intitle:"Index of" index.jsp.bak
+inurl:backup intitle:index.of inurl:admin
+"Index of /backup"
+intitle:"Index of" index.html~
+intitle:"Index of" index.php~
+intitle:"Index of" guestbook.cgi
+intitle:"Index of" fpcount.exe
+intitle:"Index of" msadcs.dll
+intitle:index.of trillian.ini
+intitle:"index.of" config.php"
+intitle:index.of.etc
+intitle:"Index of" ".htpasswd" "htgroup"  -intitle:"dist" -apache -htpasswd.c
+intitle:index.of administrators.pwd
+intitle:index.of secring.pgp
+intitle:"Index of" .mysql_history
+intitle:index.of passlist
+intitle:"Index of" passwd passwd.bak
+intitle:"Index of..etc" passwd
+intitle:"Index of" spwd.db passwd -pam.conf
+intitle:"Index of" .bash_history
+intitle:"Index of" .sh_history
+intitle:"Index of c:\Windows"
+intitle:index.of.winnt
+intitle:"Index of" access_log
+intitle:"Index of" WSFTP.LOG
+intitle:"Index of" service.pwd
+intitle:"Index of" "people.lst"
+intitle:"Index of" pwd.db
+intitle:"Index of" finance.xls
+intitle:"Index of" finances.xls
+intitle:index.of inbox dbx
+intitle:index.of dead.letter
+intitle:index.of inbox
+intitle:index.of ws_ftp.ini
+mystuff.xml intitle:"index of"
+"index of" / lck
+intitle:"index.of.personal"
+intitle:index.of.private
+inurl:index.of.protected
+intitle:index.of.protected
+intitle:index.of.secret
+intitle:"index.of.secure"
+intitle:"Index of" upload.asp
+intitle:"Index of" AT-admin.cgi
+intitle:"Index of" global.inc
+intitle:"Index of" secring.bak
+intitle:index.of master.passwd
+intitle:"Index of" ".htpasswd" htpasswd.bak
+"Index of" / "chat/logs"
+intitle:index.of cgiirc.config'
+intitle:index.of haccess.ctl
+intitle:index.of "Apache" "server at"
+intitle:Index.of robots.txt
+intitle:"Index of" mt-db-pass.cgi
+
+Password and Credential Files
+These focus on finding password files, user lists, and authentication data.
+
+allinurl:auth_user_file.txt
+filetype:xls username password email
+filetype:htpasswd htpasswd
+intitle:Index.of etc shadow
+inurl:config.php dbuname dbpass
+intitle:"Index of" master.passwd
+inurl:passlist.txt
+filetype:htaccess Basic
+inurl:ipsec.conf -intitle:manpage
+inurl:ipsec.secrets -history -bugs
+inurl:ipsec.secrets "holds shared secrets"
+inurl:htpasswd filetype:htpasswd
+
+Database Related
+Dorks for database dumps, admin interfaces, and SQL-related exposures.
+
+"Welcome to phpMyAdmin" AND " Create new database"
+"supplied argument is not a valid MySQL result resource"
+"access denied for user" "using password"
+"mysql dump" filetype:sql
+"phpMyAdmin" "running on" inurl:"main.php"
+"Select a database to view" intitle:"filemaker pro"
+"Select a database to view" intitle:"filemaker pro"
+" phpMyAdmin MySQL-Dump" filetype:txt
+" phpMyAdmin MySQL-Dump" "INSERT INTO" -"the"
+" Dumping data for table"
+"Select a database to view" intitle:"filemaker pro"
+"Select a database to view" intitle:"filemaker pro"
+intitle:phpMyAdmin "Welcome to phpMyAdmin **" "running on * as root@"
+intitle:phpMyAdmin "Welcome to phpMyAdmin **" "running on * as root@"
+"ASP.NET_SessionId" "data source="
+filetype:asp + "[ODBC SQL"
+MYSQL error message: supplied argument….
+mysql error with query
+Snitz! forums db path error
+SQL syntax error
+"mySQL error with query"
+"You have an error in your SQL syntax near"
+"Supplied argument is not a valid PostgreSQL result"
+
+Error Messages
+These reveal server errors, stack traces, and debugging info from various technologies.
+
+"A syntax error has occurred" filetype:ihtml
+"An illegal character has been found in the statement" -"previous message"
+"Can't connect to local" intitle:warning
+"Chatologica MetaSearch" "stack tracking:"
+"detected an internal error [IBM][CLI Driver][DB2/6000]"
+"Fatal error: Call to undefined function" -reply -the -next
+"Incorrect syntax near"
+"Incorrect syntax near" -the
+"ORA-00933: SQL command not properly ended"
+"PostgreSQL query failed:  ERROR:  parser: parse error"
+"Syntax error in query expression " -the
+"Unclosed quotation mark before the character string"
+"Warning: Cannot modify header information – headers already sent"
+An unexpected token "END-OF-STATEMENT" was found
+"Error Diagnostic Information" intitle:"Error Occurred While"
+filetype:asp "Custom Error Message" Category Source
+intitle:"the page cannot be found" "internet information services"
+intitle:"500 Internal Server Error" "server at"
+"ORA-00921: unexpected end of SQL command"
+"ORA-00936: missing expression"
+"Supplied argument is not a valid PostgreSQL result"
+warning "error on line" php sablotron
+intitle:"the page cannot be found" "2004 microsoft corporation"
+filetype:ihtml
+"error found handling the request" cocoon filetype:xml
+"Internal Server Error" "server at"
+"Invision Power Board Database Error"
+"ORA-12541: TNS:no listener" intitle:"error occurred"
+"Parse error: parse error, unexpected T_VARIABLE" "on line" filetype:php
+"The s?ri?t whose uid is " "is not allowed to access"
+"There seems to have been a problem with the" " Please try again by clicking the Refresh button in your web browser."
+"Unable to jump to row" "on MySQL result index" "on line"
+"Warning: Bad arguments to (join|implode) () in" "on line" -help -forum
+"Warning: Division by zero in" "on line" -forum
+"Warning: mysql_connect(): Access denied for user: ‘@" "on line" -help -forum
+"Warning: mysql_query()" "invalid query"
+"Warning: pg_connect(): Unable to connect to PostgreSQL server: FATAL"
+"Warning: Supplied argument is not a valid File-Handle resource in"
+"Warning:" "failed to open stream: HTTP request failed" "on line"
+"Warning:" "SAFE MODE Restriction in effect." "The s?ri?t whose uid is" "is not allowed to access owned by uid 0 in" "on line"
+"SQL Server Driver][SQL Server]Line 1: Incorrect syntax near"
+filetype:log "PHP Parse error" | "PHP Warning" | "PHP Error"
+filetype:php inurl:"logging.php" "Discuz" error
+ht://Dig htsearch error
+IIS 4.0 error messages
+IIS web server error messages
+Internal Server Error
+intext:"Error Message : Error loading required libraries."
+intext:"Warning: Failed opening" "on line" "include_path"
+intitle:"Apache Tomcat" "Error Report"
+intitle:"Error Occurred While Processing Request" +WHERE (SELECT|INSERT) filetype:cfm
+intitle:"Error Occurred" "The error occurred in" filetype:cfm
+intitle:"Error using Hypernews" "Server Software"
+intitle:"Execution of this s?ri?t not permitted"
+Netscape Application Server Error page
+ORA-00921: unexpected end of SQL command
+ORA-00921: unexpected end of SQL command
+PHP application warnings failing "include_path"
+Windows 2000 web server error messages
+
+Server Configuration and Test Pages
+Dorks for default or test server pages, documentation, and misconfigurations.
+
+allinurl:install/install.php
+aboutprinter.shtml
+allintitle:Netscape FastTrack Server Home Page
+intitle:"Apache HTTP Server" intitle:"documentation"
+intitle:"Welcome to IIS 4.0?
+i_index.shtml "Ready"
+intitle:"Test Page for Apache" "It Worked!"
+inurl:tech-support inurl:show Cisco
+"powered by openbsd" +"powered by apache"
+intitle:"the page cannot be found" inetmgr
+"seeing this instead" intitle:"test page for apache"
+intitle:"Test Page for Apache" "It Worked!" "on this web"
+"not for distribution" confidential
+"robots.txt" + "Disallow:" filetype:txt
+"phpinfo.php" -manual
+"cacheserverreport for" "This analysis was produced by calamaris"
+intitle:"Default PLESK Page"
+intitle:"Under construction" "does not currently have"
+intitle:Configuration.File inurl:softcart.exe
+
+Admin and Login Interfaces
+These target admin panels, login forms, and management interfaces.
+
+inurl:admin filetype:xls
+site:edu grades admin
+inurl:admin filetype:asp inurl:userlist
+inurl:admin inurl:userlist
+intitle:admin intitle:login
+intitle:"osCommerce" inurl:admin filetype:php
+intitle:"Remote Desktop Web Connection"
+intitle:"Terminal Services Web Connection"
+inurl:manyservers.htm
+intitle:admin intitle:login
+intitle:"osCommerce" inurl:admin filetype:php
+inurl:Custva.asp
+intitle:"wbem" compaq login
+intitle:admin intitle:login
+inurl:admin intitle:login
+inurl:changepassword.asp
+inurl:main.php phpMyAdmin
+inurl:main.php Welcome to phpMyAdmin
+"There are no Administrators Accounts" inurl:admin.php -mysql_fetch_row
+"Welcome to Administration" "General" "Local Domains" "SMTP Authentication" inurl:admin
+allinurl:intranet admin
+intext:"Warning: * am able * write ** configuration file" "includes/configure.php" -
+intitle:"Gateway Configuration Menu"
+intitle:"Horde :: My Portal" -"[Tickets"
+intitle:"Mail Server CMailServer Webmail" "5.2?
+intitle:"Remote Desktop Web Connection"
+intitle:"Terminal Services Web Connection"
+inurl:"/NSearch/AdminServlet"
+inurl:pls/admin_/gateway.htm
+inurl:rpSys.html
+inurl:servlet/webacc
+"delete entries" inurl:admin/delete.asp
+
+Vulnerable Applications and CMS
+Dorks for specific software versions or installations that may be vulnerable.
+
+intitle:"Gallery in Configuration mode"
+"Powered by mnoGoSearch – free web search engine software"
+inurl:footer.inc.php
+inurl:info.inc.php
+inurl:search.php vbulletin
+"This summary was generated by wwwstat"
+"Host Vulnerability Summary Report"
+"Most Submitted Forms and Scripts" "this section"
+"Network Host Assessment Report" "Internet Scanner"
+"Network Vulnerability Assessment Report"
+"These statistics were produced by getstats"
+"Thank you for your order" +receipt
+"This file was generated by Nessus"
+"This report lists" "identified by Internet Scanner"
+"This report was generated by WebLog"
+inurl:'cgiirc.config'
+intitle:"Ganglia" "Cluster Report for"
+inurl:vbstats.php "page generated"
+"Welcome to PHP-Nuke" congratulations
+"YaBB SE Dev Team"
+inurl:shop "Hassan Consulting's Shopping Cart Version 1.18?
+inurl:custva.asp
+"Powered by mnoGoSearch – free web search engine software"
+intitle:guestbook  "advanced guestbook 2.2 powered"
+filetype:asp inurl:"shopdisplayproducts.asp"
+"Powered by: vBulletin * 3.0.1?  inurl:newreply.php
+"Powered by Invision Power Board(U) v1.3 Final"
+"powered by sphider" -exploit -ihackstuff -www.cs.ioc.ee
+inurl:gotoURL.asp?url=
+"powered by antiboard"
+inurl:comersus_message.asp
+ext:pl inurl:cgi intitle:"FormMail *"  -"Referrer" -" Denied" -sourceforge -error -cvs -input
+inurl:"dispatch.php?atknodetype" |  inurl:class.at
+"Powered by Gallery v1.4.4?
+"Powered by Ikonboard 3.1.1?
+inurl:/cgi-bin/index.cgi inurl:topics inurl:viewca
+inurl:"/becommunity/community/index.php?pageurl="
+"Powered *: newtelligence" ("dasBlog 1.6?| "dasBlog 1.5?| "dasBlog 1.4?|"dasBlog 1.3?)
+"Powered by DCP-Portal v5.5?
+"FC Bigfeet" -inurl:mail
+filetype:cgi inurl:tseekdir.cgi
+filetype:php inurl:index.php inurl:"module=subjects" inurl:"func=*" (listpages| viewpage | listcat)
+filetype:cgi inurl:pdesk.cgi
+"Powered by IceWarp Software" inurl:mail
+intitle:"MRTG/RRD" 1.1* (inurl:mrtg.cgi | inurl:14all.cgi |traffic.cgi)
+inurl:com_remository
+intitle:"WordPress > * > Login form" inurl:"wp-login.php"
+inurl:"comment.php?serendipity"
+"Powered by AJ-Fork v.167?
+"Powered by Megabook *" inurl:guestbook.cgi
+"Powered by yappa-ng"
+"Powered by A-CART"
+"Online Store – Powered by ProductCart"
+"Powered by FUDforum"
+"BosDates Calendar System " "powered by BosDates v3.2 by BosDev"
+intitle:"EMUMAIL – Login" "Powered by EMU Webmail"
+intitle:"WebJeff – FileManager" intext:"login" intext:Pass|PAsse
+inurl:"messageboard/Forum.asp?"
+"1999-2004 FuseTalk Inc" -site:fusetalk.com
+"2003 DUware All Rights Reserved"
+"This page has been automatically generated by Plesk Server Administrator"
+inurl:ttt-webmaster.php
+"Copyright …. 2002 Agustin Dondo Scripts"
+"Powered by CubeCart"
+"Ideal BB Version: 0.1? -idealbb.com
+"Powered by YaPig V0.92b"
+inurl:"/site/articles.asp?idcategory="
+filetype:cgi inurl:nbmember.cgi
+"Powered by Coppermine Photo Gallery"
+"Powered by WowBB" -site:wowbb.com
+"Powered by ocPortal" -demo -ocportal.com
+inurl:"slxweb.dll"
+"Powered by DMXReady Site Chassis Manager" -site:dmxready.com
+"Powered by My Blog" intext:"FuzzyMonkey.org"
+inurl:wiki/MediaWiki
+"inurl:/site/articles.asp?idcategory="
+"Enter ip" inurl:"php-ping.php"
+intitle:welcome.to.horde
+"BlackBoard 1.5.1-f | …. 2003-4 by Yves Goergen"
+inurl:"forumdisplay.php" +"Powered by: vBulletin Version 3.0.0..4?
+inurl:technote inurl:main.cgifilename=
+"running: Nucleus v3.1? -.nucleuscms.org -demo
+"driven by: ASP Message Board"
+"Obtenez votre forum Aztek" -site:forum-aztek.com
+intext:("UBB.threads……. 6.2?|"UBB.threads……. 6.3?) intext:"You * not logged *" -site:ubbcentral.com
+inurl:/SiteChassisManager/
+inurl:directorypro.cgi
+inurl:cal_make.pl
+"Powered by PowerPortal v1.3?
+"powered by minibb" -site:www.minibb.net -intext:1.7f
+inurl:"/cgi-bin/loadpage.cgi?user_id="
+intitle:"View Img" inurl:viewimg.php
++"Powered by Invision Power Board v2.0.0..2?
++"Powered by phpBB 2.0.6..10? -phpbb.com -phpbb.pl
+ext:php intext:"Powered by phpNewMan Version"
+"Powered by WordPress" -html filetype:php -demo -wordpress.org -bugtraq
+intext:Generated.by.phpix.1.0? inurl:$mode=album
+inurl:citrix/metaframexp/default/login.asp? ClientDetection=On
+"SquirrelMail version 1.4.4? inurl:src ext:php
+"IceWarp Web Mail 5.3.0? "Powered by IceWarp"
+"Powered by MercuryBoard [v1"
+allintitle:aspjar.com guestbook
+"powered by CubeCart 2.0"
+Powered.by:.vBulletin.Version ...3.0.6
+filetype:php intitle:"paNews v2.0b4"
+"Powered by Coppermine Photo Gallery" ( "v1.2.2 b" | "v1.2.1" | "v1.2" | "v1.1" | "v1.0")
+powered.by.instaBoard.version.1.3
+intext:"Powered by phpBB 2.0.13" inurl:"cal_view_month.php"|inurl:"downloads.php"
+intitle:"myBloggie 2.1.1..2 - by myWebland"
+intitle:"osTicket :: Support Ticket System"
+inurl:sphpblog
+"html allowed" guestbook
+: vBulletin Version 1.1.5?
+"set up the administrator user" inurl:pivot
+"Welcome to PHP-Nuke" congratulations
+"Welcome to the Prestige Web-Based Configurator"
+"YaBB SE Dev Team"
+"you can now password" | "this is a special page only seen by you. your profile visitors" inurl:imchaos
+("Indexed.By"|"Monitored.By") hAcxFtpScan
+(inurl:/shop.cgi/page=) | (inurl:/shop.pl/page=)
+allinurl:"index.php" "site=sglinks"
+allinurl:install/install.php
+filetype:cgi inurl:"fileman.cgi"
+filetype:cgi inurl:"Web_Store.cgi"
+filetype:php inurl:vAuthenticate
+filetype:pl intitle:"Ultraboard Setup"
+Gallery in configuration mode
+Hassan Consulting's Shopping Cart Version 1.18
+intitle:"MvBlog powered"
+intitle:"Samba Web Administration Tool" intext:"Help Workgroup"
+intitle:"Uploader – Uploader v6? -pixloads.com
+intitle:osCommerce inurl:admin intext:"redistributable under the GNU" intext:"Online Catalog" -demo -site:oscommerce.com
+inurl:"index.php? module=ew_filemanager"
+inurl:aol*/_do/rss_popup?blogID=
+inurl:info.inc.php
+inurl:ManyServers.htm
+inurl:newsdesk.cgi? inurl:"t="
+inurl:search.php vbulletin
+natterchat inurl:home.asp -site:natterchat.co.uk
+XOOPS Custom Installation
+
+Logs and Statistics
+These find server logs, usage reports, and vulnerability scans.
+
+intitle:"statistics of" "advanced web statistics"
+intitle:"Usage Statistics for" "Generated by Webalizer"
+"ftp://" "www.eastgame.net"
+inurl:sitebuildercontent
+inurl:sitebuilderfiles
+inurl:sitebuilderpictures
+"Welcome to Intranet"
+"Powered by mnoGoSearch – free web search engine software"
+intitle:index.of master.passwd
+"This summary was generated by wwwstat"
+"Host Vulnerability Summary Report"
+"Most Submitted Forms and Scripts" "this section"
+"Network Host Assessment Report" "Internet Scanner"
+"Network Vulnerability Assessment Report"
+"These statistics were produced by getstats"
+"Thank you for your order" +receipt
+"This file was generated by Nessus"
+"This report lists" "identified by Internet Scanner"
+"This report was generated by WebLog"
+
+Webcams and Surveillance
+Dorks for exposed webcams, video feeds, and camera interfaces.
+
+inurl:"MultiCameraFrame?Mode="
+"Active Webcam Page" inurl:8080
+inurl:yapboz_detay.asp + View Webcam User Accessing
+allinurl:control/multiview
+inurl:"ViewerFrame?Mode="
+intitle:"WJ-NT104 Main Page"
+inurl:netw_tcp.shtml
+intitle:"supervisioncam protocol"
+
+Miscellaneous
+Uncategorized or broad dorks, including FTP scans and specific exploits.
+
+"not for distribution" confidential
+inurl:footer.inc.php
+inurl:info.inc.php
