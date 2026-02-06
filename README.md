@@ -40,3 +40,86 @@ If you discover a vulnerability, exposed data, misconfiguration, or security iss
 Stay ethical. Hunt bugs responsibly. Secure the web (and the things connected to it).
 
 Last updated: January 2026
+
+---
+
+## Dork Runner (authorized use only)
+
+This repo now includes a small helper script, `dork_runner.py`, that can:
+
+- Load the dork list from `DorkList`
+- Ingest search results from an **authorized** source
+- Rank results using a simple keyword-based score
+- Export JSON/CSV or display a TUI view
+
+**Do not use this script against targets you do not own or have explicit written permission to test.**
+
+### Quick start (imported results)
+
+1. Save authorized search results to JSON (list of objects with `title`, `link`, `snippet`, and optional `dork`).
+2. Run the script using the import provider (from the repo root, or pass `--dorks-file` with a full path):
+
+```bash
+python3 dork_runner.py --provider import --import-results results.json --export findings.json
+```
+
+To open a TUI view instead:
+
+```bash
+python3 dork_runner.py --provider import --import-results results.json --tui
+```
+
+### Optional: SerpAPI provider (search engines via API)
+
+If you have a SerpAPI key and permission to run these queries, you can use:
+
+```bash
+export SERPAPI_API_KEY=\"your_key_here\"
+python3 dork_runner.py --provider serpapi --max-results 5 --delay 1.5 --export findings.json
+```
+
+You can also select other supported engines via SerpAPI:
+
+```bash
+export SERPAPI_API_KEY=\"your_key_here\"
+python3 dork_runner.py --provider serpapi --serpapi-engine bing --max-results 5 --delay 1.5 --export findings.json
+```
+
+This uses SerpAPI rather than direct scraping. Ensure you comply with SerpAPI and search-engine terms and your engagement rules.
+
+### Optional: Shodan provider (internet-facing services)
+
+If you have a Shodan API key and permission to run these queries, you can use:
+
+```bash
+export SHODAN_API_KEY=\"your_key_here\"
+python3 dork_runner.py --provider shodan --shodan-page 1 --delay 1.5 --export findings.json
+```
+
+Shodan results are mapped to host pages on shodan.io. Ensure you comply with Shodan terms and your engagement rules.
+
+### Optional: External tool provider (Kali tools)
+
+If you want to use other tools available on Kali, you can run them per-dork and parse their JSON output.
+The external command must print JSON (an array of objects) to stdout, and you can map fields to `title`,
+`link`, and `snippet`:
+
+```bash
+python3 dork_runner.py --provider external \
+  --external-command "some-tool --query {query} --json" \
+  --external-title-field title \
+  --external-link-field link \
+  --external-snippet-field snippet \
+  --export findings.json
+```
+
+For tools that emit JSON Lines, use:
+
+```bash
+python3 dork_runner.py --provider external \
+  --external-command "some-tool --query {query} --jsonl" \
+  --external-parse jsonl \
+  --export findings.json
+```
+
+Ensure you have explicit authorization and follow the tool and platform terms for any data sources used.
