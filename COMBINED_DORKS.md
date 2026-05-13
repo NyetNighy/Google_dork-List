@@ -1,7 +1,7 @@
 # 🔍 Combined Google & Shodan Dork Master List
 
 > **Sources:** NyetNighy's `Google_dork-List` repo + OriResearcher's ongoing OSINT research  
-> **Last updated:** May 12, 2026  
+> **Last updated:** May 13, 2026  
 > **Usage:** Replace `target.com` with your target. Use only with permission.  
 > **Note:** `port:` and `vuln:` operators are **Shodan/BinaryEdge only** — not valid on Google.
 
@@ -617,8 +617,255 @@ tag:ics OR tag:scada            # ML-tagged industrial systems
 "voter system serial" country:US  # Voting machine exposures (disturbing)
 ```
 
+
 ---
 
+## 📂 SECTION 17 — Local File Inclusion (LFI) Paths
+
+> LFI path traversal dorks — test against known-vulnerable applications with permission.
+
+```
+/includes/header.php?systempath=
+/Gallery/displayCategory.php?basepath=
+/index.inc.php?PATH_Includes=
+/ashnews.php?pathtoashnews=
+/ashheadlines.php?pathtoashnews=
+/modules/xgallery/upgrade_album.php?GALLERY_BASEDIR=
+/demo/includes/init.php?user_inc=
+/jaf/index.php?show=
+/inc/shows.inc.php?cutepath=
+/poll/admin/common.inc.php?base_path=
+/pollvote/pollvote.php?pollname=
+/sources/post.php?fil_config=
+/modules/My_eGallery/public/displayCategory.php?basepath=
+/bb_lib/checkdb.inc.php?libpach=
+/include/livre_include.php?no_connect=lol&chem_absolu=
+/index.php?from_market=Y&pageurl=
+/modules/mod_mainmenu.php?mosConfig_absolute_path=
+/pivot/modules/module_db.php?pivot_path=
+/modules/4nAlbum/public/displayCategory.php?basepath=
+/derniers_commentaires.php?rep=
+/modules/coppermine/themes/default/theme.php?THEME_DIR=
+/modules/coppermine/include/init.inc.php?CPG_M_DIR=
+/modules/coppermine/themes/coppercop/theme.php?THEME_DIR=
+/coppermine/themes/maze/theme.php?THEME_DIR=
+/myPHPCalendar/admin.php?cal_dir=
+/agendax/addevent.inc.php?agendax_path=
+/modules/mod_mainmenu.php?mosConfig_absolute_path=
+/modules/xoopsgallery/upgrade_album.php?GALLERY_BASEDIR=
+/main.php?page=
+/default.php?page=
+/index.php?i=
+/index.php?section=
+/index.php?inc=
+/index.php?page=
+/index.php?content=
+/index.php?include=
+/index.php?dir=
+/index.php?path=
+/index.php?file=
+/index.php?loc=
+/index.php?module=
+/index.php?load=
+/index.php?name=
+/index.php?p=
+/index.php?url=
+/index.php?view=
+/admin.php?inc=
+/admin.php?module=
+/admin.php?page=
+/admin.php?path=
+/admin.php?file=
+/admin.php?dir=
+/admin.php?load=
+/admin.php?src=
+/wp-admin/admin.php?page=
+/wp-admin/admin.php?inc=
+/administrator/index.php?option=
+/administrator/admin.php?inc=
+
+---
+
+## 📂 SECTION 18 — CCTV, Webcams & Video Server Panels
+
+> Publicly exposed camera interfaces and DVR/NVR login portals — for authorized PT/asset discovery only.
+
+```
+inurl:view/view.shtml
+inurl:/view.shtml
+intitle:"Live View / - AXIS" OR inurl:view/view.shtml
+inurl:ViewerFrame?Mode=
+inurl:ViewerFrame?Mode=Refresh
+inurl:axis-cgi/jpg
+inurl:axis-cgi/mjpg (motion-JPEG)
+inurl:view/indexFrame.shtml
+inurl:view/index.shtml
+intitle:start inurl:cgistart
+inurl:(viewerframe?mode=motion OR view/index.shtml OR axis-cgi/mjpg)
+intitle:"Live View / - AXIS" OR "webcamXP" OR "D-Link Internet Camera"
+inurl:"top.htm" intitle:"BlueNet Video Server"
+intitle:"printer status" intext:"HP LaserJet"
+intitle:"Web Viewer" intext:"ID" "Password" (axis OR sony OR panasonic)
+inurl:"/cgi-bin/guestimage.html" OR inurl:"/cgi-bin/viewer/video.jpg"
+intitle:"DVR Login" OR intitle:"NVR Login" intext:"Username" "Password"
+inurl:"onvif/device_service" OR inurl:"onvif/snapshot"
+intitle:"Ricoh" "Printer" intext:"Web Image Monitor"
+intitle:"Brother" "Web Based Management" intext:"password"
+inurl:"MultiCameraFrame?Mode="
+"Active Webcam Page" inurl:8080
+inurl:yapboz_detay.asp + View Webcam User Accessing
+allinurl:control/multiview
+intitle:"WJ-NT104 Main Page"
+intitle:"supervisioncam protocol"
+"Server: yawcam" OR "webcamXP" OR "webcam 7"
+html:"DVR_H264 ActiveX"
+intitle:"Network Camera" (axis OR sony OR panasonic OR hikvision OR dahua)
+intext:"Real-time IP Camera Monitoring System" intext:"ActiveX Mode (For IE Browser)"
+intitle:"Teltonika -Web UI" OR intitle:"Teltonika-RUT -Web UI" inurl:"/cgi-bin/luci"
+intitle:"GoAhead WebServer" intext:"Login" "Camera"
+```
+
+---
+
+## 📂 SECTION 19 — SQL Injection (SQLi) Parameter Patterns
+
+> Common vulnerable URL parameters — for authorized testing only.
+
+```
+inurl:read.php?=
+inurl:trainers.php?id=
+inurl:buy.php?category=
+inurl:article.php?ID=
+inurl:play_old.php?id=
+inurl:declaration_more.php?decl_id=
+inurl:pageid=
+inurl:games.php?id=
+inurl:page.php?file=
+inurl:newsDetail.php?id=
+inurl:gallery.php?id=
+inurl:article.php?id=
+inurl:show.php?id=
+inurl:staff_id=
+inurl:newsitem.php?num=
+inurl:readnews.php?id=
+inurl:top10.php?cat=
+inurl:historialeer.php?num=
+inurl:reagir.php?num=
+inurl:Stray-Questions-View.php?num=
+inurl:forum_bds.php?num=
+inurl:game.php?id=
+inurl:view_product.php?id=
+inurl:newsone.php?id=
+inurl:sw_comment.php?id=
+inurl:news.php?id=
+inurl:avd_start.php?avd=
+inurl:event.php?id=
+inurl:product-item.php?id=
+inurl:sql.php?id=
+inurl:news_view.php?id=
+inurl:select_biblio.php?id=
+inurl:humor.php?id=
+inurl:aboutbook.php?id=
+inurl:ogl_inet.php?ogl_id=
+inurl:fiche_spectacle.php?id=
+inurl:communique_detail.php?id=
+inurl:sem.php3?id=
+inurl:kategorie.php4?id=
+inurl:faq2.php?id=
+inurl:show_an.php?id=
+inurl:preview.php?id=
+inurl:loadpsb.php?id=
+inurl:opinions.php?id=
+inurl:spr.php?id=
+inurl:pages.php?id=
+inurl:announce.php?id=
+inurl:clanek.php4?id=
+inurl:participant.php?id=
+inurl:download.php?id=
+inurl:view_items.php?id=
+inurl:home.php?cat=
+inurl:item_book.php?CAT=
+inurl:goods_detail.php?data=
+inurl:storemanager/contents/item.php?page_code=
+inurl:customer/board.htm?mode=
+inurl:help/com_view.html?code=
+inurl:n_replyboard.php?typeboard=
+inurl:prev_results.php?prodID=
+inurl:bbs/view.php?no=
+inurl:gnu/?doc=
+inurl:zb/view.php?uid=
+inurl:m_view.php?ps_db=
+inurl:productlist.php?tid=
+inurl:product-list.php?id=
+inurl:onlinesales/product.php?product_id=
+inurl:garden_equipment/Fruit-Cage/product.php?pr=
+inurl:product.php?shopprodid=
+inurl:product_info.php?products_id=
+inurl:showsub.php?id=
+inurl:productlist.php?fid=
+inurl:products.php?cat=
+inurl:product.php?sku=
+inurl:store/product.php?productid=
+inurl:productList.php?cat=
+inurl:product_detail.php?product_id=
+inurl:product.php?pid=
+inurl:more_details.php?id=
+inurl:rounds-detail.php?id=
+inurl:product.php?pid=
+inurl:category.php?id=
+inurl:item.php?id=
+inurl:product.php?id=
+inurl:details.php?prodId=
+inurl:product.php?id=
+inurl:product_info.php?item_id=
+```
+
+---
+
+## 📂 SECTION 20 — Sensitive File Types & Leak Patterns
+
+> Documents, backups, and config files that often contain credentials or PII — use with permission.
+
+```
+ext:(doc | pdf | xls | txt | ps | rtf | odt | sxw | psw | ppt | pps | xml) (intext:confidential salary | intext:"budget approved") inurl:confidential
+ext:CDX CDX
+ext:asa | ext:bak intext:uid intext:pwd -"uid..pwd" database | server | dsn
+ext:asp "powered by DUForum" inurl(messages|details|login|default|register) -site:duware.com
+ext:cfg radius.cfg
+ext:cgi intitle:"control panel" "enter your owner password to continue!"
+ext:conf NoCatAuth -cvs
+ext:conf inurl:rsyncd.conf -cvs -man
+ext:pwd inurl:(service | authors | administrators | users) "# -FrontPage-"
+ext:reg reg +intext:"defaultusername" +intext:"defaultpassword"
+filetype:fp5 fp5 -site:gov -site:mil -"cvs log"
+filetype:netrc password
+filetype:pem intext:private
+filetype:pl "Download: SuSE Linux Openexchange Server CA"
+filetype:pst pst -from -to -date
+filetype:reg reg +intext:"defaultusername" +intext:"defaultpassword"
+filetype:url +inurl:"ftp://" +inurl:"@"
+data filetype:mdb -site:gov -site:mil
+intext:(password | passcode) intext:(username | userid | user) filetype:csv
+inurl:email filetype:mdb
+inurl:backup filetype:mdb
+inurl:profiles filetype:mdb
+inurl:secring ext:skr | ext:pgp | ext:bak
+inurl:wvdial.conf intext:"password"
+inurl:slapd.conf intext:"credentials" -manpage -"Manual Page" -man: -sample
+inurl:slapd.conf intext:"rootpw" -manpage -"Manual Page" -man: -sample
+intitle:"Index Of" cookies.txt "size"
+intitle:"index of" mysql.conf OR mysql_config
+intitle:"Samba Web Administration Tool" intext:"Help Workgroup"
+intitle:"ZyXEL Prestige Router" "Enter password"
+intitle:"Dell Remote Access Controller"
+BEGIN (CERTIFICATE|DSA|RSA) filetype:csr
+BEGIN (CERTIFICATE|DSA|RSA) filetype:key
+"#mysql dump" filetype:sql 21232f297a57a5a743894a0e4a801fc3
+"Chatologica MetaSearch" "stack tracking:"
+"Novell, Inc" WEBACCESS Username Password "Version *.*" Copyright -inurl:help -guides|guide
+intitle:"ITS System Information" "Please log on to the SAP System"
+intitle:Novell intitle:WebAccess "Copyright *-* Novell, Inc"
+"OPENSRS Domain Management" inurl:manage.cgi
 ## ⚠️  Syntax Reference — Google vs Shodan
 
 | Operator | Google | Shodan | Notes |
