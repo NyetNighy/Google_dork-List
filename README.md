@@ -1,4 +1,12 @@
-# ⚠️ IMPORTANT DISCLAIMER & LEGAL NOTICE ⚠️
+# Google Dork List — OSINT & Authorized Recon
+
+> Curated, categorized Google (and multi-engine) dorks for **ethical security research**, bug bounty, and authorized penetration testing only.
+
+**Last updated:** 2026-09-29
+
+---
+
+## ⚠️ IMPORTANT DISCLAIMER & LEGAL NOTICE
 
 **This repository is provided strictly for EDUCATIONAL and ETHICAL SECURITY RESEARCH purposes only.**
 
@@ -39,15 +47,42 @@ If you discover a vulnerability, exposed data, misconfiguration, or security iss
 
 Stay ethical. Hunt bugs responsibly. Secure the web (and the things connected to it).
 
-Last updated: January 2026
+---
+
+## What’s in this repo
+
+| File | Description |
+|------|-------------|
+| **[COMBINED_DORKS.md](COMBINED_DORKS.md)** | Master list — categorized Google/Shodan-style dorks (docs, directories, secrets, admin panels, databases, errors, cloud/DevOps, emails, subdomains, IoT, bug bounty, CMS + **modern 2025–2026 AI/cloud/framework additions**) |
+| **[ALT_SEARCH_ENGINES.md](ALT_SEARCH_ENGINES.md)** | Syntax & examples for Censys, FOFA, Quake, ZoomEye, BinaryEdge, Hunter, LeakIX, GreyNoise, crt.sh, SecurityTrails, Netlas, Onyphe, Buckets, and more |
+| **dork_runner.py** | Optional helper script to load results, score them, and export (import / SerpAPI / Shodan providers) |
+| **LICENSE** | License file |
+
+---
+
+## Quick start with the dork lists
+
+1. Open [COMBINED_DORKS.md](COMBINED_DORKS.md).
+2. Copy any section (or the whole file) into a plain `.txt` batch file if needed.
+3. Replace `target.com` with your authorized target.
+4. Run with a tool such as [AtDork](https://github.com/amnottdevv/atdork):
+
+```bash
+# Example with AtDork
+python -m atdork --batch-file dorks.txt -r 15
+```
+
+or paste individual queries into Google / Bing / DuckDuckGo / etc.
+
+**Always stay in scope and respect rate limits.**
 
 ---
 
 ## Dork Runner (authorized use only)
 
-This repo now includes a small helper script, `dork_runner.py`, that can:
+This repo includes a small helper script, `dork_runner.py`, that can:
 
-- Load the dork list from `DorkList`
+- Load the dork list
 - Ingest search results from an **authorized** source
 - Rank results using a simple keyword-based score
 - Export JSON/CSV or display a TUI view
@@ -71,17 +106,17 @@ python3 dork_runner.py --provider import --import-results results.json --tui
 
 ### Optional: SerpAPI provider (search engines via API)
 
-If you have a SerpAPI key and permission to run these queries, you can use:
+If you have a SerpAPI key and permission to run these queries:
 
 ```bash
-export SERPAPI_API_KEY=\"your_key_here\"
+export SERPAPI_API_KEY="your_key_here"
 python3 dork_runner.py --provider serpapi --max-results 5 --delay 1.5 --export findings.json
 ```
 
 You can also select other supported engines via SerpAPI:
 
 ```bash
-export SERPAPI_API_KEY=\"your_key_here\"
+export SERPAPI_API_KEY="your_key_here"
 python3 dork_runner.py --provider serpapi --serpapi-engine bing --max-results 5 --delay 1.5 --export findings.json
 ```
 
@@ -89,11 +124,23 @@ This uses SerpAPI rather than direct scraping. Ensure you comply with SerpAPI an
 
 ### Optional: Shodan provider (internet-facing services)
 
-If you have a Shodan API key and permission to run these queries, you can use:
+If you have a Shodan API key and permission to run these queries:
 
 ```bash
-export SHODAN_API_KEY=\"your_key_here\"
+export SHODAN_API_KEY="your_key_here"
 python3 dork_runner.py --provider shodan --shodan-page 1 --delay 1.5 --export findings.json
 ```
 
 Shodan results are mapped to host pages on shodan.io. Ensure you comply with Shodan terms and your engagement rules.
+
+---
+
+## Contributing / Updates
+
+- Keep the legal disclaimer intact.
+- Prefer adding new dorks to the appropriate section in `COMBINED_DORKS.md` or the relevant engine notes in `ALT_SEARCH_ENGINES.md`.
+- Modern patterns (AI keys, cloud tokens, new frameworks) belong in **Section 13** of the combined list.
+
+---
+
+*Stay ethical. Authorized use only.*
