@@ -1,0 +1,374 @@
+# ==============================================================================
+# Google Dorking Queries — Security Assessment
+# ==============================================================================
+# Copy this file, edit as needed, and run:
+#   python3 dorking.py dorks.txt targets.txt results.json
+#
+# NOTES:
+#   - Lines starting with # are comments
+#   - Each non-comment line is one dork query
+#   - site: operator can be used in dork (overrides default target)
+# ==============================================================================
+
+# --- 🔐 Cloud Storage & Bucket Findings ---
+# AWS S3 bucket misconfigurations
+site:* ext:s3
+ext:s3 inurl:s3.amazonaws.com
+# AWS IAM credentials
+AKIA[0-9A-Z]{16}
+# GCP service accounts
+type: service_account
+# GCP credentials
+googleusercontent.com
+# Azure Storage
+ext:blob
+azure.devstorage
+
+# --- 🔑 API Keys & Credentials ---
+# AWS access key IDs
+AKIA[0-9A-Z]{16}
+# GitHub tokens
+ghs_[A-Za-z0-9]{36}
+# GitHub fine-grained tokens
+github_pat_[A-Za-z0-9_]{22,}$
+# GitLab tokens
+glpat-[A-Za-z0-9]{20}
+# Slack tokens
+xox[baprs]-[A-Za-z0-9-]{10,}
+# Stripe API keys
+sk_live_[0-9a-zA-Z]{24}
+# Stripe publishable keys
+pk_live_[0-9a-zA-Z]{24}
+
+# --- 🌐 SSH & Authentication ---
+# SSH private keys
+-----BEGIN RSA PRIVATE KEY-----
+# SSH private keys (ed25519)
+-----BEGIN OPENSSH PRIVATE KEY-----
+# SSH id_rsa
+inurl:id_rsa ext:key
+# Remote access config files
+mst.cfg
+# Putty session files
+*.putty ext:sav
+
+# --- 📁 Source Code & Version Control ---
+# Git configuration files
+inurl:git ext:config
+# SVN metadata directories
+inurl:.svn/
+# Mercurial metadata
+inurl:.hg/
+# Backup archives
+ext:tar.gz inurl:backup
+ext:zip inurl:backup
+ext:rar
+ext:7z
+ext:bz2
+
+# --- 📝 Logs & Error Messages ---
+# Access logs
+ext:access_log inurl:logs
+# Nginx logs
+inurl:nginx.log
+# Apache logs
+inurl:access.log
+# Error logs
+inurl:error.log ext:log
+# Debug logs
+inurl:debug.log
+
+# --- 🐳 Docker & Kubernetes ---
+# Kubernetes configuration files
+ext:yaml inurl:kubeconfig
+# Docker configuration files
+ext:yml docker
+# Kubernetes config files
+inurl:k8s
+
+# --- 💻 IDE & Dev Configuration ---
+# VS Code configuration files
+inurl:.vscode
+# Vim configuration files
+inurl:.vimrc
+# Bash configuration files
+inurl:.bashrc
+# PostgreSQL configuration
+inurl:postgresql.conf
+
+# --- 📁 Backup & Archive Files ---
+# Tar archives
+ext:tar.gz inurl:backup
+# Zip archives
+ext:zip inurl:backup
+# RAR archives
+ext:rar
+# 7z archives
+ext:7z
+# Bzip2 archives
+ext:bz2
+
+# --- 🔍 OSINT & Public Records ---
+# Email addresses
+intext:".com" ext:log
+# Phone numbers
+intext:"phone"
+# Employee data
+inurl:biography
+# Company information
+inurl:crunchbase
+# GitHub repositories
+intext:".github"
+# Internal dashboards
+inurl:dashboard
+# Test environments
+inurl:staging
+# Staging environments
+inurl:test-local
+# Dev environments
+inurl:dev
+
+# --- 🔒 Authentication & Access Control ---
+# Authentication bypass pages
+inurl:"admin" ext:php
+# Default credentials
+"admin" "password"
+# Session token exposure
+"sessionid"
+# JWT secrets
+jwt_secret
+# Password reset endpoints
+inurl:reset ext:php
+# Two-factor authentication bypass
+inurl:2fa
+
+# --- 🛠️ Web Application Frameworks ---
+# Laravel framework (Artisan CLI)
+inurl: artisan
+# Django framework
+inurl:manage.py
+# Ruby on Rails routes
+inurl:routes.rb
+# Node.js server
+inurl:static/server.js
+# PHP configuration files
+inurl:config.php
+
+# --- 🐳 Containers & Docker ---
+# Docker configuration files
+ext:yml docker
+# Kubernetes deployments
+inurl:k8s
+
+# --- 📁 Backup & Archive Files ---
+# Tar archives
+ext:tar.gz inurl:backup
+# Zip archives
+ext:zip inurl:backup
+# RAR archives
+ext:rar
+# 7z archives
+ext:7z
+# Bzip2 archives
+ext:bz2
+
+# --- 🔍 OSINT & Public Records ---
+# Email addresses
+intext:".com" ext:log
+# Phone numbers
+intext:"phone"
+# Employee data
+inurl:biography
+# Company information
+inurl:crunchbase
+# GitHub repositories
+intext:".github"
+# Internal dashboards
+inurl:dashboard
+# Test environments
+inurl:staging
+# Staging environments
+inurl:test-local
+# Dev environments
+inurl:dev
+
+# --- 🔒 Authentication & Access Control ---
+# Authentication bypass pages
+inurl:"admin" ext:php
+# Default credentials
+"admin" "password"
+# Session token exposure
+"sessionid"
+# JWT secrets
+jwt_secret
+# Password reset endpoints
+inurl:reset ext:php
+# Two-factor authentication bypass
+inurl:2fa
+
+# --- 🛠️ Web Application Frameworks ---
+# Laravel framework (Artisan CLI)
+inurl: artisan
+# Django framework
+inurl:manage.py
+# Ruby on Rails routes
+inurl:routes.rb
+# Node.js server
+inurl:static/server.js
+# PHP configuration files
+inurl:config.php
+
+# --- 🐳 Containers & Docker ---
+# Docker configuration files
+ext:yml docker
+# Kubernetes deployments
+inurl:k8s
+
+# --- 📁 IDE & Dev Configuration ---
+# VS Code configuration files
+inurl:.vscode
+# Vim configuration files
+inurl:.vimrc
+# Bash configuration files
+inurl:.bashrc
+# PostgreSQL configuration
+inurl:postgresql.conf
+
+# --- 📁 Backup & Archive Files ---
+# Tar archives
+ext:tar.gz inurl:backup
+# Zip archives
+ext:zip inurl:backup
+# RAR archives
+ext:rar
+# 7z archives
+ext:7z
+# Bzip2 archives
+ext:bz2
+
+# --- 🔍 OSINT & Public Records ---
+# Email addresses
+intext:".com" ext:log
+# Phone numbers
+intext:"phone"
+# Employee data
+inurl:biography
+# Company information
+inurl:crunchbase
+# GitHub repositories
+intext:".github"
+# Internal dashboards
+inurl:dashboard
+# Test environments
+inurl:staging
+# Staging environments
+inurl:test-local
+# Dev environments
+inurl:dev
+
+# --- 🔒 Authentication & Access Control ---
+# Authentication bypass pages
+inurl:"admin" ext:php
+# Default credentials
+"admin" "password"
+# Session token exposure
+"sessionid"
+# JWT secrets
+jwt_secret
+# Password reset endpoints
+inurl:reset ext:php
+# Two-factor authentication bypass
+inurl:2fa
+
+# --- 🛠️ Web Application Frameworks ---
+# Laravel framework (Artisan CLI)
+inurl: artisan
+# Django framework
+inurl:manage.py
+# Ruby on Rails routes
+inurl:routes.rb
+# Node.js server
+inurl:static/server.js
+# PHP configuration files
+inurl:config.php
+
+# --- 🐳 Containers & Docker ---
+# Docker configuration files
+ext:yml docker
+# Kubernetes deployments
+inurl:k8s
+
+# --- 📁 IDE & Dev Configuration ---
+# VS Code configuration files
+inurl:.vscode
+# Vim configuration files
+inurl:.vimrc
+# Bash configuration files
+inurl:.bashrc
+# PostgreSQL configuration
+inurl:postgresql.conf
+
+# --- 📁 Backup & Archive Files ---
+# Tar archives
+ext:tar.gz inurl:backup
+# Zip archives
+ext:zip inurl:backup
+# RAR archives
+ext:rar
+# 7z archives
+ext:7z
+# Bzip2 archives
+ext:bz2
+
+# --- 🔍 OSINT & Public Records ---
+# Email addresses
+intext:".com" ext:log
+# Phone numbers
+intext:"phone"
+# Employee data
+inurl:biography
+# Company information
+inurl:crunchbase
+# GitHub repositories
+intext:".github"
+# Internal dashboards
+inurl:dashboard
+# Test environments
+inurl:staging
+# Staging environments
+inurl:test-local
+# Dev environments
+inurl:dev
+
+# --- 🔒 Authentication & Access Control ---
+# Authentication bypass pages
+inurl:"admin" ext:php
+# Default credentials
+"admin" "password"
+# Session token exposure
+"sessionid"
+# JWT secrets
+jwt_secret
+# Password reset endpoints
+inurl:reset ext:php
+# Two-factor authentication bypass
+inurl:2fa
+
+# --- 🛠️ Web Application Frameworks ---
+# Laravel framework (Artisan CLI)
+inurl: artisan
+# Django framework
+inurl:manage.py
+# Ruby on Rails routes
+inurl:routes.rb
+# Node.js server
+inurl:static/server.js
+# PHP configuration files
+inurl:config.php
+
+# --- 🐳 Containers & Docker ---
+# Docker configuration files
+ext:yml docker
+# Kubernetes deployments
+inurl:k8s
+```
