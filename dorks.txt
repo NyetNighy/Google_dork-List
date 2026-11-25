@@ -29,11 +29,6 @@ sk_live_[0-9a-zA-Z]{24}
 pk_live_[0-9a-zA-Z]{24}
 
 # --- 🌐 SSH & Authentication ---
------BEGIN RSA PRIVATE KEY-----
------BEGIN OPENSSH PRIVATE KEY-----
-inurl:id_rsa ext:key
-mst.cfg
-*.putty ext:sav
 
 # --- 📁 Source Code & Version Control ---
 inurl:git ext:config
