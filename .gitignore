@@ -15,3 +15,112 @@ Thumbs.db
 *.log
 output/
 results/
+
+# ============================
+# Secrets & Credentials
+# ============================
+# Private keys and certificates
+*.key
+*.pem
+*.ppk
+*.p12
+*.pfx
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+*.cer
+*.crt
+*.p7b
+*.pfx
+
+# API keys and tokens
+*.env
+.env.local
+.env.production
+.env.*.local
+*.cred
+*.credentials
+.credentials
+*.secrets
+
+# Database credentials
+*.sql
+*.db
+*.sqlite
+*.mysqldb
+*.postgres
+
+# Configuration files with secrets
+config/settings.*.local
+config/credentials.*
+secrets.*
+credentials.*
+
+# Cloud credentials
+*.aws/credentials
+.aws/credentials
+*.cloudcredentials
+*.gcp
+credentials.json
+
+# IAM
+*.iam
+*.policy
+*.role
+
+# Slack, Discord, other chat tokens
+*.slack
+*.discord
+discord_bot_token
+
+# Cloud provider
+*.gcp
+*.google
+*.azure
+*.aws
+
+# ============================
+# OS & Editor
+# ============================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.ini~
+*.orig
+*.bak
+*.backup
+
+# ============================
+# IDE & Tools
+# ============================
+.idea/
+.vscode/
+*.sublime*
+*.project
+*.classpath
+*.cproject
+.settings/
+compile_commands.json
+.ccls
+Cargo.lock
+yarn.lock
+package-lock.json
+
+# ============================
+# OS
+# ============================
+.log
+*.log
+coverage/
+build/
+dist/
+node_modules/
+venv/
+env/
+ENV/
+.venv/
+.pyvenv/
+```
